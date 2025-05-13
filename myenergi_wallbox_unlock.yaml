@@ -55,14 +55,14 @@ blueprint:
 mode: single
 max_exceeded: silent
 
-trigger:
-  - platform: state
-    entity_id: !input trigger
-    to: Open
+triggers:
+  - trigger: state
+    entity_id: !input sensor
+    to: 'Open'
 
 conditions:
-    - platform: state
-      entity_id: !input conditions
+    - condition: state
+      entity_id: !input sensor
       state: 'EV Connected'
 
 

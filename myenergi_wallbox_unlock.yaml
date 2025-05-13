@@ -32,7 +32,6 @@ blueprint:
       default: ''
     conditions:
        name: Condition
-       state: 'EV Connected'
        selector:
          entity:
            multiple: false
@@ -59,10 +58,13 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input trigger
+    to: Open
 
 conditions:
     - platform: state
       entity_id: !input conditions
+      state: 'EV Connected'
+
 
 variables:
   hubsn: !input hubsn

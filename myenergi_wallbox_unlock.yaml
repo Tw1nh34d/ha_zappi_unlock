@@ -32,12 +32,12 @@ blueprint:
       default: ''
     conditions:
        name: Condition
+       state: 'EV Connected'
        selector:
          entity:
            multiple: false
            filter:
              domain: sensor
-           state: 'EV Connected'
     curl_command_service:
       name: CURL command service
       selector:

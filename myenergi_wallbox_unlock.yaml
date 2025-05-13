@@ -37,6 +37,7 @@ blueprint:
            multiple: false
            filter:
              domain: sensor
+           state: 'EV Connected'
     curl_command_service:
       name: CURL command service
       selector:

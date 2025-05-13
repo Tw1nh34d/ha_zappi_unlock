@@ -1,0 +1,116 @@
+
+blueprint:
+  name: Myenergi Zappi unlock
+  description: >
+    Upload data from Home Assistant to WUnderground.
+
+    Config:
+      The station_id and station_key variable must be fetched from WUnderground.
+      The sensor_* variables are the sensors whos data will be uploaded
+      The trigger_entities variable specifies the entries to trigger state changes on (this could be a list)
+      The curl_command_service variable specifies the CURL-service to execute.
+      The refresh_frequency variable specifies the frequency the sensors update their data
+      The dewpoint temperature can be calculated based on the outdoor temperature and the outdoor humidity.
+        By default, it will be calculated, to disable this set calculate_dewpt to false.
+
+    The CURL-service must exist in Home Assistant.
+    This can be configured with the following YAML
+      shell_command:
+        curl_get: 'curl -X GET {{ url }}'
+
+    Automation config example:
+      automation:
+        - id: wunderground_data_upload
+          alias: WUnderground data upload
+          use_blueprint:
+            path: wunderground_upload.yaml
+            input:
+              station_id: !secret wunderground_station_id
+              station_key: !secret wunderground_station_key
+              sensor_baro: 'sensor.outdoor_pressure'
+              sensor_temp: 'sensor.outdoor_temperature'
+              sensor_humidity: 'sensor.outdoor_humidity'
+              sensor_rain: 'sensor.outdoor_rain'
+              sensor_dailyrain: 'sensor.outdoor_rain_today'
+              refresh_frequency: 300
+              trigger_entities:
+                - sensor.outdoor_temperature
+                - sensor.outdoor_humidity
+                - sensor.outdoor_rain
+                - sensor.outdoor_rain_today
+              curl_command_service: shell_command.curl_get
+  domain: automation
+  source_url: "https://github.com/dvandonkelaar/home-assistant-blueprints/raw/main/wunderground_upload.yaml"
+  input:
+    hubsn:
+      name: Hub Serial
+      default: ''
+    apikey:
+      name: API Key
+      default: ''
+    zappisn:
+      name: Zappi Serial
+      default: ''
+    server:
+      name: Myenergi Server
+      default: 's18.myenergi.net'
+    trigger:
+      name: Trigger
+      selector:
+        entity:
+          multiple: false
+          filter:
+            domain: sensor
+      default: ''
+    conditions:
+       name: Condition
+       selector:
+         entity:
+           multiple: false
+           filter:
+             domain: sensor
+    curl_command_service:
+      name: CURL command service
+      selector:
+        text:
+      default: ''
+    delay:
+      name: Delay after publishing results
+      selector:
+        number:
+          min: 0
+          max: 10800
+          step: 1
+          unit_of_measurement: seconds
+      default: 10
+
+mode: single
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input trigger
+
+conditions:
+    - platform: state
+      entity_id: !input conditions
+
+variables:
+  hubsn: !input hubsn
+  apikey: !input apikey
+  zappisn: !input zappisn
+  delay: !input delay
+
+action:
+  - alias: "Check if hubsn and apikey exist"
+    if: >
+      {{      hubsn != ''
+          and apikey != ''
+      }}
+    then:
+      - service: !input curl_command_service
+        data:
+          url: "{{ hubsn }}:{{ apikey }} -H 'accept: application/json' -H 'content-type: application/json'  --compressed 'https://{{ server }}/cgi-jlock-{{ zappisn}}-00000010'"
+  - alias: "Wait to prevent multiple uploads"
+    delay:
+      seconds: "{{ delay | int }}"

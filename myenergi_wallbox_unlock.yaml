@@ -6,7 +6,7 @@ blueprint:
 
     Config:
       shell_command:
-        curl_get: 'curl -X GET {{ url }}'
+        myenergi_curl_get: 'curl --digest -u {{ url }}'
   domain: automation
   source_url: "https://github.com/Tw1nh34d/ha_zappi_unlock/blob/main/myenergi_wallbox_unlock.yaml"
   input:

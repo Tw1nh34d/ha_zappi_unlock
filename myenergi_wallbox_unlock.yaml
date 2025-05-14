@@ -63,7 +63,7 @@ trigger:
 
 conditions:
   - platform: state
-    entity_id: !input conditions_entities
+    entity_id: !input condition_entities
       # state: 'EV Connected'
 
 

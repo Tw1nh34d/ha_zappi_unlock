@@ -34,7 +34,7 @@ blueprint:
        name: Condition
        selector:
          entity:
-           multiple: false
+           multiple: true
            filter:
              domain: sensor
        default: ''

@@ -59,12 +59,12 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input trigger_entities
-      #   to: 'Open'
+         to: 'Open'
 
 conditions:
   - platform: state
     entity_id: !input condition_entities
-      # state: 'EV Connected'
+       state: 'EV Connected'
 
 
 variables:

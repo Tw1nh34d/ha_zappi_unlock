@@ -57,12 +57,12 @@ mode: single
 max_exceeded: silent
 
 triggers:
-  - trigger: state
+  - platform: state
     entity_id: !input trigger
     to: 'Open'
 
 conditions:
-  - condition: state
+  - platform: state
     entity_id: !input condition
     state: 'EV Connected'
 

@@ -22,7 +22,7 @@ blueprint:
     server:
       name: Myenergi Server
       default: 's18.myenergi.net'
-    triggers:
+    trigger:
       name: Trigger
       selector:
         entity:
@@ -56,14 +56,14 @@ blueprint:
 mode: single
 max_exceeded: silent
 
-triggers:
+trigger:
   - platform: state
     entity_id: !input trigger
       #   to: 'Open'
 
 conditions:
   - platform: state
-    entity_id: !input condition
+    entity_id: !input conditions
       # state: 'EV Connected'
 
 

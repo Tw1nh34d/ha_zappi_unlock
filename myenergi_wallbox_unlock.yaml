@@ -22,7 +22,7 @@ blueprint:
     server:
       name: Myenergi Server
       default: 's18.myenergi.net'
-    trigger:
+    triggers:
       name: Trigger
       selector:
         entity:
@@ -37,6 +37,7 @@ blueprint:
            multiple: false
            filter:
              domain: sensor
+       default: ''
     curl_command_service:
       name: CURL command service
       selector:
@@ -57,13 +58,13 @@ max_exceeded: silent
 
 triggers:
   - trigger: state
-    entity_id: !input sensor
+    entity_id: !input trigger
     to: 'Open'
 
 conditions:
-    - condition: state
-      entity_id: !input sensor
-      state: 'EV Connected'
+  - condition: state
+    entity_id: !input condition
+    state: 'EV Connected'
 
 
 variables:

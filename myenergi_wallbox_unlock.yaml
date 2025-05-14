@@ -30,7 +30,7 @@ blueprint:
           filter:
             domain: sensor
       default: ''
-    condition_entities:
+    conditions_entities:
        name: Condition
        selector:
          entity:
@@ -63,7 +63,7 @@ trigger:
 
 conditions:
   - platform: state
-    entity_id: !input condition_entities
+    entity_id: !input conditions_entities
        state: 'EV Connected'
 
 

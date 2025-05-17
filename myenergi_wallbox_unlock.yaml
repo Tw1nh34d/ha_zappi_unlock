@@ -36,7 +36,7 @@ blueprint:
          entity:
            multiple: true
            filter:
-             domain: sensor
+             domain: device_tracker
        default: ''
     curl_command_service:
       name: CURL command service

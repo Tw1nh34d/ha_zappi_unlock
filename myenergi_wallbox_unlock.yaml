@@ -62,7 +62,7 @@ trigger:
     to: "EV Connected"
 
 conditions:
-   - condition: state
+   - condition: numeric_state
      entity_id: !input conditions_entities
      state: 0
 

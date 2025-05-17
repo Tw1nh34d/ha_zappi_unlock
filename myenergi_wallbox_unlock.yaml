@@ -65,9 +65,6 @@ conditions:
   - condition: state
     entity_id: !input conditions_entities
     state: "home"
-       minutes: "{{ states('input_number.lock_min')|int }}"
-       seconds: "{{ states('input_number.lock_sec')|int }}"
-
 
 variables:
   hubsn: !input hubsn

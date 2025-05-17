@@ -82,7 +82,7 @@ action:
     then:
       - service: !input curl_command_service
         data:
-          url: "{{ hubsn }}:{{ apikey }} -H 'accept: application/json' -H 'content-type: application/json' --compressed 'https://{{ server }}/cgi-jlock-{{zappisn}}-00000010'"
+          url: "{{ hubsn }}:{{ apikey }} -H 'accept: application/json' -H 'content-type: application/json' --compressed 'https://{{ server }}/cgi-jlock-{{ zappisn }}-00000010'"
   - alias: "Wait to prevent multiple uploads"
     delay:
       seconds: "{{ delay | int }}"

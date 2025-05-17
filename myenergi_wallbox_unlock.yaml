@@ -59,7 +59,7 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input trigger_entities
-    to: "home"
+    state: "home"
 
 conditions:
   - condition: state

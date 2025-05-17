@@ -65,7 +65,7 @@ conditions:
   - condition: state
     entity_id: !input conditions_entities
     state: "home"
-
+      ###
 variables:
   hubsn: !input hubsn
   apikey: !input apikey

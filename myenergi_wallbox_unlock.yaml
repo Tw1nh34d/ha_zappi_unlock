@@ -28,7 +28,7 @@ blueprint:
         entity:
           multiple: true
           filter:
-            domain: device_tracker
+            domain: sensor
       default: ''
     conditions_entities:
        name: Condition
@@ -36,7 +36,7 @@ blueprint:
          entity:
            multiple: true
            filter:
-             domain: sensor
+             domain: device_tracker
        default: ''
     curl_command_service:
       name: CURL command service
@@ -59,12 +59,14 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input trigger_entities
-    to: "home"
+    to: "EV Connected"
 
 conditions:
   - condition: state
     entity_id: !input conditions_entities
-    state: "EV Connected"
+    state: "home"
+       minutes: "{{ states('input_number.lock_min')|int }}"
+       seconds: "{{ states('input_number.lock_sec')|int }}"
 
 
 variables:

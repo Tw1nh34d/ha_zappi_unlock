@@ -1,6 +1,7 @@
-# ha_zappi_unlock
+# Myenergi - Zappi unlock (Home Assistant)
 
-Unlock Zappi after EV has been connected.
+Automation blueprint to unlock Zappi after EV has been connected and its location (device tracker) is set to "home".
+
 
 > [!TIP]
 > Requires curl command!

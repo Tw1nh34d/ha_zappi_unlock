@@ -2,10 +2,11 @@
 
 Unlock Zappi after EV has been connected.
 
-**Requires curl command!
-**
+> [!TIP]
+> Requires curl command!
 
-File: configuration.yaml
 
+## configuration.yaml
+```yaml
   shell_command:
       myenergi_curl_get: 'curl --digest -u {{ url }}'

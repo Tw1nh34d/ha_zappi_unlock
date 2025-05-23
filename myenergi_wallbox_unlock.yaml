@@ -42,7 +42,7 @@ blueprint:
       name: CURL command service
       selector:
         text:
-      default: ''
+      default: 'shell_command.myenergi_curl_get'
     delay:
       name: Delay after publishing results
       selector:

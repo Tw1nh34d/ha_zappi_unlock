@@ -64,6 +64,7 @@ trigger:
 conditions:
   - condition: state
     entity_id: !input conditions_entity
+    attribute: car  
     state: "home"
 
 variables:

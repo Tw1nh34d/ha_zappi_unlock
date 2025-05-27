@@ -89,7 +89,7 @@ action:
       seconds: "{{ delay | int }}"
   - service: notify.pushover
     data:
-      message: "{{ ev }} triggered unlock" 
+      message: "{{ ev.attributes.car }} triggered unlock" 
       title: "Zappi Plug"
       data:
         sound: persistent

@@ -93,6 +93,6 @@ action:
       title: "{{ trigger.to_state.attributes.friendly_name }}"
       data:
         sound: persistent
-        priority: 2
+        priority: 0
         retry: 60
         expire: 3600 

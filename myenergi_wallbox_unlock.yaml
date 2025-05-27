@@ -22,19 +22,19 @@ blueprint:
     server:
       name: Myenergi Server
       default: 's18.myenergi.net'
-    trigger_entities:
+    trigger_entity:
       name: Trigger
       selector:
         entity:
-          multiple: true
+          multiple: false
           filter:
             domain: sensor
       default: ''
-    conditions_entities:
+    condition_entity:
        name: Condition
        selector:
          entity:
-           multiple: true
+           multiple: false
            filter:
              domain: device_tracker
        default: ''
@@ -58,12 +58,12 @@ max_exceeded: silent
 
 trigger:
   - platform: state
-    entity_id: !input trigger_entities
+    entity_id: !input trigger_entity
     to: "EV Connected"
 
 conditions:
   - condition: state
-    entity_id: !input conditions_entities
+    entity_id: !input condition_entity
     state: "home"
 
 variables:
@@ -72,6 +72,7 @@ variables:
   apikey: !input apikey
   zappisn: !input zappisn
   delay: !input delay
+  ev: !input condition_entity
 
 action:
   - alias: "Check if hubsn and apikey exist"
@@ -88,7 +89,7 @@ action:
       seconds: "{{ delay | int }}"
   - service: notify.pushover
     data:
-      message: "{{ conditions_entities.state.attributes.car }} triggered unlock" 
+      message: "{{ ev }} triggered unlock" 
       title: "Zappi Plug"
       data:
         sound: persistent

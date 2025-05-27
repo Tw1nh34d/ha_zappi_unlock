@@ -88,8 +88,8 @@ action:
       seconds: "{{ delay | int }}"
   - service: notify.pushover
     data:
-      message: "..." 
-      title: "Plug unlocked!"
+      message: "{{ conditions.from_state.attributes.car }} triggered unlock" 
+      title: "Zappi Plug"
       data:
         sound: persistent
         priority: 2

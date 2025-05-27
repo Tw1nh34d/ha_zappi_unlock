@@ -30,7 +30,7 @@ blueprint:
           filter:
             domain: sensor
       default: ''
-    condition_entity:
+    conditions_entity:
        name: Condition
        selector:
          entity:
@@ -63,7 +63,7 @@ trigger:
 
 conditions:
   - condition: state
-    entity_id: !input condition_entity
+    entity_id: !input conditions_entity
     state: "home"
 
 variables:
@@ -72,7 +72,7 @@ variables:
   apikey: !input apikey
   zappisn: !input zappisn
   delay: !input delay
-  ev: !input condition_entity
+  ev: !input conditions_entity
 
 action:
   - alias: "Check if hubsn and apikey exist"

@@ -89,7 +89,7 @@ action:
       seconds: "{{ delay | int }}"
   - service: notify.pushover
     data:
-      message: "{{ ev }} triggered unlock {{ state_attr('trigger_entity', 'friendly_name') }}" 
+      message: "{{ ev }} triggered unlock {{ state_attr('trigger_entity', 'integration') }}" 
       title: "{{ trigger.to_state.attributes.friendly_name }}"
       data:
         sound: persistent

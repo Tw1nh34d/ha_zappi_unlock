@@ -89,7 +89,7 @@ action:
       seconds: "{{ delay | int }}"
   - service: notify.pushover
     data:
-      message: "{{ ev }} triggered unlock {{ state_attr({{ ev }},'vin') }}" 
+      message: "{{ ev }} triggered unlock {{ state_attr('device_tracker.condition','vin') }}" 
       title: "{{ trigger.to_state.attributes.friendly_name }}"
       data:
         sound: persistent
